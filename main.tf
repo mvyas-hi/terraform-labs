@@ -19,11 +19,6 @@ provider "azurerm" {
   subscription_id = "c8165f0d-91bd-4d1e-87b5-fbfb0a581041"
   
 }
-# Configure the GitHub Provider
-provider "github" {
-    token = "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"
-}
-
 
 resource "azurerm_resource_group" "rg" {
   name     = "mv-terraform-dev"
@@ -97,4 +92,15 @@ resource "azurerm_container_registry" "acr" {
   sku = "Premium"
   admin_enabled = true
   
+}
+output "resource_group_name" {
+  value = azurerm_resource_group.rg.name
+}
+
+output "container_app_environment_id" {
+  value = azurerm_container_app_environment.rg.id
+}
+
+output "azurerm_container_fqdn" {
+  value = azurerm_container_app.mycongainer.latest_revision_fqdn
 }
